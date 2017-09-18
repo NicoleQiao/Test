@@ -1,6 +1,6 @@
 <%-- 
-    Document   : homepage
-    Created on : 2017-9-5, 17:03:12
+    Document   : response
+    Created on : 2017-9-18, 15:15:17
     Author     : qiaoys
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>录入-磁铁设计</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        
+        <h1>Hello World!</h1>
     </body>
 </html>

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <description>input design</description>
+        <servlet-name>NewDesign</servlet-name>
+        <servlet-class>heps.db.magnet.servlet.NewDesign</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewDesign</servlet-name>
+        <url-pattern>/NewDesign</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -7,10 +16,9 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
-        <welcome-file>homepage.jsp</welcome-file>
     </welcome-file-list>
     <resource-ref>
-        <description>databae for heps-db-magnet_db</description>
+        <description>databae for heps-db-magnet</description>
         <res-ref-name>hepsMagnetDatasource</res-ref-name>
         <res-type>javax.sql.ConnectionPoolDataSource</res-type>
         <res-auth>Container</res-auth>

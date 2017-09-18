@@ -9,12 +9,24 @@ and open the template in the editor.
         <title>高能同步辐射光源-磁铁数据库</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+            function jump1(){
+                 var tab=0;
+               　url = "indextab.html?"+tab;
+                location.href=url;
+            }
+             function jump2(){
+                 var tab=1;
+               　url = "indextab.html?"+tab;
+                location.href=url;
+            }
+        </script>
     </head>
+    
     <body>
-        <div>
-        <button type="button" onclick="location.href='tab1.html'">数据查询</button>
-        <button type="button" >数据录入</button>
-        
+        <div style="margin-top:150px; text-align:center" >
+        <button type="button" style="margin-right: 50px; font-size: 24px;width: 150px;height: 100px" onclick="jump1()">数据查询</button>
+        <button type="button" style="font-size: 24px;width: 150px;height: 100px" onclick="jump2()">数据录入</button>     
         </div>
     </body>
 </html>
