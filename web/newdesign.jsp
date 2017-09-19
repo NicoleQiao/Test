@@ -32,7 +32,8 @@
                         <option >八极铁</option>
                     </select>
                     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"style="margin-right: 100px" onclick="newtype()">Add</a>
-                    <select class="easyui-combobox" id="magfamily" style="width:15%" label="磁铁型号" labelPosition="left" data-options="required:true">
+                    <a>磁铁类型</a>
+                    <select  id="magfamily" style="width:15%;height: 25px" >
                         <option>A</option>
                         <option>B</option>
                     </select>
@@ -81,7 +82,15 @@
                 var name = window.prompt("新建磁铁型号", "");
                 if (name !== null && name !== "")
                 {
-                    window.alert(name);
+                     var x = document.getElementById("magfamily");
+                    var option = document.createElement("option");
+                    option.text = name;
+                    try {
+
+                        x.add(option, x.options[null]);
+                    } catch (e) {
+                        x.add(option, null);
+                    }
                 }
             }
         </script>  
