@@ -17,18 +17,25 @@ and open the template in the editor.
             var url = location.search;
             var tabstat = url.substr(1);                    
         </script>
+          <style>
+            .button_giant{
+                border-radius: 4px;
+                background-color:  #E0ECFF;
+                border-color: #95B8E7;
+                color: #000; }
+            </style>
     </head>
     <body>       
         <div  id="tab" class="easyui-tabs"   data-options="tabPosition:'top',tabWidth:120,tabHeight:50,border:false" >
             <div id="tab0" title="录入"  style=" margin:80px 700px; padding:10px ">
-                <button style="font-size: 24px;width: 150px;height: 100px" onclick="window.location = 'newdesign.jsp'">磁铁设计</button>
-                <button style="margin-left: 50px;font-size: 24px;width: 150px;height: 100px">磁铁信息</button>
-                <button style="margin-left: 50px;font-size: 24px;width: 150px;height: 100px">磁测数据</button>
+                <button class="button_giant" style="font-size: 24px;width: 150px;height: 100px" onclick="window.location = 'newdesign.jsp'">磁铁设计</button>
+                <button class="button_giant" style="margin-left: 50px;font-size: 24px;width: 150px;height: 100px">磁铁信息</button>
+                <button class="button_giant" style="margin-left: 50px;font-size: 24px;width: 150px;height: 100px">磁测数据</button>
             </div>
             <div id="tab1" title="查询"  style="margin:80px 700px; padding:10px">
-                <button style="font-size: 24px;width: 150px;height: 100px">磁铁设计</button>
-                <button style="margin-left: 50px;font-size: 24px;width: 150px;height: 100px">磁铁信息</button>
-                <button style="margin-left: 50px;font-size: 24px;width: 150px;height: 100px">磁测数据</button>
+                <button class="button_giant" style="font-size: 24px;width: 150px;height: 100px">磁铁设计</button>
+                <button class="button_giant" style="margin-left: 50px;font-size: 24px;width: 150px;height: 100px">磁铁信息</button>
+                <button class="button_giant" style="margin-left: 50px;font-size: 24px;width: 150px;height: 100px">磁测数据</button>
             </div>
         </div>
         <script type="text/javascript">          
