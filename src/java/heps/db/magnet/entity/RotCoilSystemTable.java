@@ -299,7 +299,7 @@ public class RotCoilSystemTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.RotCoilSystemTable[ rotCoilRunId=" + rotCoilRunId + " ]";
+        return "heps.db.magnet.entity.RotCoilSystemTable[ rotCoilRunId=" + rotCoilRunId + " ]";
     }
     
 }

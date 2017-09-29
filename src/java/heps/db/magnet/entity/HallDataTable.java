@@ -142,7 +142,7 @@ public class HallDataTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.HallDataTable[ dataId=" + dataId + " ]";
+        return "heps.db.magnet.entity.HallDataTable[ dataId=" + dataId + " ]";
     }
     
 }

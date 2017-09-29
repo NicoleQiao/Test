@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="heps-db-magenet_dbPU" transaction-type="JTA">
+  <persistence-unit name="heps-db-magnetPU" transaction-type="JTA">
     <jta-data-source>jdbc/hepsMagnetDatasource</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <class>heps.db.magnet.entity.DesignOtherTable</class>
+    <class>heps.db.magnet.entity.DeviceInfoTable</class>
+    <class>heps.db.magnet.entity.HallDataAllTable</class>
+    <class>heps.db.magnet.entity.HallDataTable</class>
+    <class>heps.db.magnet.entity.HallProbeSystemTable</class>
+    <class>heps.db.magnet.entity.MagnetDesignParameterTable</class>
+    <class>heps.db.magnet.entity.MagnetDesignRequirementTable</class>
+    <class>heps.db.magnet.entity.MagnetDesignTable</class>
+    <class>heps.db.magnet.entity.RcsDataAllTable</class>
+    <class>heps.db.magnet.entity.RcsDataTable</class>
+    <class>heps.db.magnet.entity.RotCoilSystemTable</class>
+    <class>heps.db.magnet.entity.StretchedWireSystem</class>
+    <class>heps.db.magnet.entity.SwsDataTable</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+    </properties>
   </persistence-unit>
 </persistence>

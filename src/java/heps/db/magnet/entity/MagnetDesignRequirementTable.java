@@ -196,7 +196,7 @@ public class MagnetDesignRequirementTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.MagnetDesignRequirementTable[ designId=" + designId + " ]";
+        return "heps.db.magnet.entity.MagnetDesignRequirementTable[ designId=" + designId + " ]";
     }
     
 }

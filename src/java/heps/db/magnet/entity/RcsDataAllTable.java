@@ -112,7 +112,7 @@ public class RcsDataAllTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.RcsDataAllTable[ dataId=" + dataId + " ]";
+        return "heps.db.magnet.entity.RcsDataAllTable[ dataId=" + dataId + " ]";
     }
     
 }

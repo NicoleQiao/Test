@@ -252,7 +252,7 @@ public class StretchedWireSystem implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.StretchedWireSystem[ swRunId=" + swRunId + " ]";
+        return "heps.db.magnet.entity.StretchedWireSystem[ swRunId=" + swRunId + " ]";
     }
     
 }

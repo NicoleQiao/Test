@@ -112,7 +112,7 @@ public class SwsDataTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.SwsDataTable[ dataId=" + dataId + " ]";
+        return "heps.db.magnet.entity.SwsDataTable[ dataId=" + dataId + " ]";
     }
     
 }

@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "MagnetDesignTable.findByFamily", query = "SELECT m FROM MagnetDesignTable m WHERE m.family = :family")
     , @NamedQuery(name = "MagnetDesignTable.findByDesignName", query = "SELECT m FROM MagnetDesignTable m WHERE m.designName = :designName")
     , @NamedQuery(name = "MagnetDesignTable.findByDesignBy", query = "SELECT m FROM MagnetDesignTable m WHERE m.designBy = :designBy")
-    , @NamedQuery(name = "MagnetDesignTable.findByApprovedBy", query = "SELECT m FROM MagnetDesignTable m WHERE m.approvedBy = :approvedBy")})
+    , @NamedQuery(name = "MagnetDesignTable.findByApprovedBy", query = "SELECT m FROM MagnetDesignTable m WHERE m.approvedBy = :approvedBy")
+    , @NamedQuery(name = "MagnetDesignTable.findByRemark", query = "SELECT m FROM MagnetDesignTable m WHERE m.remark = :remark")})
 public class MagnetDesignTable implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,12 +61,17 @@ public class MagnetDesignTable implements Serializable {
     @Size(max = 45)
     @Column(name = "approved_by")
     private String approvedBy;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "magnetDesignTable")
-    private MagnetDesignRequirementTable magnetDesignRequirementTable;
+    @Size(max = 255)
+    @Column(name = "remark")
+    private String remark;
     @OneToMany(mappedBy = "designId")
     private Collection<DeviceInfoTable> deviceInfoTableCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "magnetDesignTable")
+    private MagnetDesignRequirementTable magnetDesignRequirementTable;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "magnetDesignTable")
     private MagnetDesignParameterTable magnetDesignParameterTable;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "designId")
+    private Collection<DesignOtherTable> designOtherTableCollection;
 
     public MagnetDesignTable() {
     }
@@ -122,12 +128,12 @@ public class MagnetDesignTable implements Serializable {
         this.approvedBy = approvedBy;
     }
 
-    public MagnetDesignRequirementTable getMagnetDesignRequirementTable() {
-        return magnetDesignRequirementTable;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setMagnetDesignRequirementTable(MagnetDesignRequirementTable magnetDesignRequirementTable) {
-        this.magnetDesignRequirementTable = magnetDesignRequirementTable;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     @XmlTransient
@@ -139,12 +145,29 @@ public class MagnetDesignTable implements Serializable {
         this.deviceInfoTableCollection = deviceInfoTableCollection;
     }
 
+    public MagnetDesignRequirementTable getMagnetDesignRequirementTable() {
+        return magnetDesignRequirementTable;
+    }
+
+    public void setMagnetDesignRequirementTable(MagnetDesignRequirementTable magnetDesignRequirementTable) {
+        this.magnetDesignRequirementTable = magnetDesignRequirementTable;
+    }
+
     public MagnetDesignParameterTable getMagnetDesignParameterTable() {
         return magnetDesignParameterTable;
     }
 
     public void setMagnetDesignParameterTable(MagnetDesignParameterTable magnetDesignParameterTable) {
         this.magnetDesignParameterTable = magnetDesignParameterTable;
+    }
+
+    @XmlTransient
+    public Collection<DesignOtherTable> getDesignOtherTableCollection() {
+        return designOtherTableCollection;
+    }
+
+    public void setDesignOtherTableCollection(Collection<DesignOtherTable> designOtherTableCollection) {
+        this.designOtherTableCollection = designOtherTableCollection;
     }
 
     @Override
@@ -169,7 +192,7 @@ public class MagnetDesignTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.MagnetDesignTable[ designId=" + designId + " ]";
+        return "heps.db.magnet.entity.MagnetDesignTable[ designId=" + designId + " ]";
     }
     
 }

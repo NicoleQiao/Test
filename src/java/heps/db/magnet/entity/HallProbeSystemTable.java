@@ -67,13 +67,13 @@ public class HallProbeSystemTable implements Serializable {
     @Size(max = 45)
     @Column(name = "description")
     private String description;
-    @JoinColumn(name = "device_id", referencedColumnName = "device_id")
-    @ManyToOne
-    private DeviceInfoTable deviceId;
     @OneToMany(mappedBy = "runId")
     private Collection<HallDataAllTable> hallDataAllTableCollection;
     @OneToMany(mappedBy = "runId")
     private Collection<HallDataTable> hallDataTableCollection;
+    @JoinColumn(name = "device_id", referencedColumnName = "device_id")
+    @ManyToOne
+    private DeviceInfoTable deviceId;
 
     public HallProbeSystemTable() {
     }
@@ -138,14 +138,6 @@ public class HallProbeSystemTable implements Serializable {
         this.description = description;
     }
 
-    public DeviceInfoTable getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(DeviceInfoTable deviceId) {
-        this.deviceId = deviceId;
-    }
-
     @XmlTransient
     public Collection<HallDataAllTable> getHallDataAllTableCollection() {
         return hallDataAllTableCollection;
@@ -162,6 +154,14 @@ public class HallProbeSystemTable implements Serializable {
 
     public void setHallDataTableCollection(Collection<HallDataTable> hallDataTableCollection) {
         this.hallDataTableCollection = hallDataTableCollection;
+    }
+
+    public DeviceInfoTable getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(DeviceInfoTable deviceId) {
+        this.deviceId = deviceId;
     }
 
     @Override
@@ -186,7 +186,7 @@ public class HallProbeSystemTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.HallProbeSystemTable[ hallProbeRunId=" + hallProbeRunId + " ]";
+        return "heps.db.magnet.entity.HallProbeSystemTable[ hallProbeRunId=" + hallProbeRunId + " ]";
     }
     
 }

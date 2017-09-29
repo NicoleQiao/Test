@@ -18,32 +18,25 @@
             p{font-size:14px;}
             span {font-size:14px;}
         </style>
-        <script type="text/javascript">
-            function submit() {
-                var yn = window.confirm("确认提交？");
-                if (yn) {
-                    alert("您已提交成功");
-                }
-            }
-        </script>
+
     </head>
     <body>
         <h2>录入磁铁设计信息</h2>       
-        <div class="easyui-panel"  style="width:100%;padding:60px 60px;position: relative;" >
-            <form action="NewDesign" method="POST" target="_blank" >
+        <div class="easyui-panel"  style="width:100%;padding:30px 60px 60px;position: relative;" >
+            <form action="NewDesign" method="POST" target="_blank" onsubmit="return submitform();">
                 <div style="margin:0 auto;text-align: center">
                     <span>磁铁种类: </span> 
                     <select  id="magtype" name="magtype" style="width:15%;height: 25px" >
-                        <option value="b">二极铁</option>
-                        <option value="q">四极铁</option>
-                        <option value="h">六极铁</option>
-                        <option value="o">八极铁</option>
+                        <option value="二极铁">二极铁</option>
+                        <option value="四极铁">四极铁</option>
+                        <option value="六极铁">六极铁</option>
+                        <option value="八极铁">八极铁</option>
                     </select>
                     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="margin-right: 50px" onclick="newtype()">新建种类</a>
                     <span>磁铁型号: </span>
                     <select  id="magfamily" name="magfamily" style="width:15%;height: 25px" >
-                        <option value="1">A</option>
-                        <option value="2">B</option>
+                        <option value="1">I</option>
+                        <option value="2">II</option>
                     </select>
                     <a href="#"  class="easyui-linkbutton" data-options="iconCls:'icon-add'"style="margin-right: 50px" onclick="newfamily()">新建型号</a>
                 </div>
@@ -51,19 +44,20 @@
                     <div id="table1" style="margin-left:20px ;float: left ">
                         <p> 请输入磁铁设计要求：
                             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="getChanges1()">查看修改项</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="show()">xianshi</a>
 
                         </p>                                               
-                        <table id="design_require" class="easyui-propertygrid" style="width:400px" data-options="
+                        <table id="design_require" name="design_require" class="easyui-propertygrid" style="width:400px" data-options="
                                url: 'design_require.json',
                                method: 'get',
                                showGroup: true,
                                scrollbarSize: 0,
-                               columns: mycolumns
+                               columns: mycolumns                           
                                ">
                         </table>   
-                        <div style="margin:10px 0;"></div>
-                        <div class="easyui-panel" title="其他信息" >
-                            <div style="margin-bottom:10px">
+                        <div style="margin:20px 0;"></div>
+                        <div class="easyui-panel" title="其他信息"  >
+                            <div style="margin-bottom:10px;margin-top: 10px">
                                 <input  class="easyui-textbox" label="磁铁设计人：（多人请用分号隔开）" labelPosition="top" style="width:100%">
                             </div>
                             <div style="margin-bottom:10px">
@@ -73,7 +67,7 @@
                                 <input class="easyui-filebox" label="上传机械设计图:（PDF格式）" labelPosition="top" data-options="prompt:'选择机械设计文件...'" style="width:100%">
                             </div>
                             <div style="margin-bottom:20px">
-                                <input class="easyui-filebox" label=上传物理设计图：（PDF格式）" labelPosition="top" data-options="prompt:'选择物理设计文件...'" style="width:100%">
+                                <input class="easyui-filebox" label="上传物理设计图：（PDF格式）" labelPosition="top" data-options="prompt:'选择物理设计文件...'" style="width:100%">
                             </div>                            
                         </div>
                     </div>
@@ -82,7 +76,7 @@
                             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="getChanges2()">查看修改项</a>
                             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addrow()">新增设计参数</a>
                         </p>
-                        <table id="design_para" class="easyui-propertygrid" style="width:400px" data-options="
+                        <table id="design_para" name="design_para" class="easyui-propertygrid" style="width:400px" data-options="
                                url: 'design_para.json',
                                method: 'get',
                                showGroup: true,
@@ -95,16 +89,36 @@
                 </div>
                 <div style="width:1800px;position: absolute;bottom: 0;margin:0 auto;text-align: center">
                     <p>输入完成请点击提交
-                        <input style="width:90px; " TYPE="submit" VALUE="提交" onclick="submit()">
+                        <input style="width:90px; " type="submit" value="提交" >
+                        <input type="hidden" id="hd1" name="hd1"/>
+
                     </p>
                 </div>
 
             </form>
 
         </div>
+        <script type="text/javascript">
+            function isExistLoginName() {
+                alert("onblur!");
+            }
+            function submitform() {
+                var all = $("#design_require").datagrid("getData");
+                document.getElementById("hd1").value = JSON.stringify(all);
 
+                var yn = window.confirm("确认提交？");
+                if (yn) {
+                    alert("您已提交成功");
+                } else
+                    return false;
+            }
+        </script>
 
         <script type="text/javascript">
+            function show() {
+                var all = $("#design_require").datagrid("getData");
+                alert('myData : ' + JSON.stringify(all));
+            }
             function newtype()
             {
                 var name = window.prompt("新建磁铁类型", "");
@@ -139,9 +153,21 @@
             }
             var mycolumns = [[
                     {field: 'name', title: '设计参数', width: 100, sortable: true},
-                    {field: 'value', title: '数值', width: 100, resizable: false}
+                    {field: 'value', title: '数值', width: 100, resizable: false, formatter: function (value, arr) {
+                            var editor = '';
+                            if (typeof arr.editor === 'object') {
+                                editor = arr.editor.type;
+                            } else {
+                                editor = arr.editor;
+                            }
+                            if (editor === "numberbox" && value !== '') {
+                                return Number(value);
+                            }
+                        }}
                 ]];
             function getChanges1() {
+                //var all=$('#table_require').getData();
+                //  alert(all);
                 var s = '';
                 var rows = $('#design_require').propertygrid('getChanges');
                 for (var i = 0; i < rows.length; i++) {
@@ -158,7 +184,7 @@
                 alert(s);
             }
             function addrow() {
-                var input = window.prompt("新建设计参数,格式：参数名/参数组名/参数类型(text,number,date,datetime)", "property/others/text");
+                var input = window.prompt("新建设计参数,格式：参数名/参数组名/参数类型(text或number)", "property/其他/text");
                 var slice = input.split("/");
                 var property = slice[0];
                 var group = slice[1];
@@ -178,6 +204,7 @@
                 };
                 $('#design_para').propertygrid('appendRow', row);
             }
-        </script>   
+        </script>  
+
     </body>
 </html>

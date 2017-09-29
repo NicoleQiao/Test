@@ -332,7 +332,7 @@ public class MagnetDesignParameterTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.MagnetDesignParameterTable[ designId=" + designId + " ]";
+        return "heps.db.magnet.entity.MagnetDesignParameterTable[ designId=" + designId + " ]";
     }
     
 }

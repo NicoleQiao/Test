@@ -74,15 +74,15 @@ public class DeviceInfoTable implements Serializable {
     @Size(max = 255)
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "deviceId")
-    private Collection<HallProbeSystemTable> hallProbeSystemTableCollection;
-    @OneToMany(mappedBy = "deviceId")
-    private Collection<RotCoilSystemTable> rotCoilSystemTableCollection;
     @JoinColumn(name = "design_id", referencedColumnName = "design_id")
     @ManyToOne
     private MagnetDesignTable designId;
     @OneToMany(mappedBy = "deviceId")
     private Collection<StretchedWireSystem> stretchedWireSystemCollection;
+    @OneToMany(mappedBy = "deviceId")
+    private Collection<HallProbeSystemTable> hallProbeSystemTableCollection;
+    @OneToMany(mappedBy = "deviceId")
+    private Collection<RotCoilSystemTable> rotCoilSystemTableCollection;
 
     public DeviceInfoTable() {
     }
@@ -163,6 +163,23 @@ public class DeviceInfoTable implements Serializable {
         this.description = description;
     }
 
+    public MagnetDesignTable getDesignId() {
+        return designId;
+    }
+
+    public void setDesignId(MagnetDesignTable designId) {
+        this.designId = designId;
+    }
+
+    @XmlTransient
+    public Collection<StretchedWireSystem> getStretchedWireSystemCollection() {
+        return stretchedWireSystemCollection;
+    }
+
+    public void setStretchedWireSystemCollection(Collection<StretchedWireSystem> stretchedWireSystemCollection) {
+        this.stretchedWireSystemCollection = stretchedWireSystemCollection;
+    }
+
     @XmlTransient
     public Collection<HallProbeSystemTable> getHallProbeSystemTableCollection() {
         return hallProbeSystemTableCollection;
@@ -179,23 +196,6 @@ public class DeviceInfoTable implements Serializable {
 
     public void setRotCoilSystemTableCollection(Collection<RotCoilSystemTable> rotCoilSystemTableCollection) {
         this.rotCoilSystemTableCollection = rotCoilSystemTableCollection;
-    }
-
-    public MagnetDesignTable getDesignId() {
-        return designId;
-    }
-
-    public void setDesignId(MagnetDesignTable designId) {
-        this.designId = designId;
-    }
-
-    @XmlTransient
-    public Collection<StretchedWireSystem> getStretchedWireSystemCollection() {
-        return stretchedWireSystemCollection;
-    }
-
-    public void setStretchedWireSystemCollection(Collection<StretchedWireSystem> stretchedWireSystemCollection) {
-        this.stretchedWireSystemCollection = stretchedWireSystemCollection;
     }
 
     @Override
@@ -220,7 +220,7 @@ public class DeviceInfoTable implements Serializable {
 
     @Override
     public String toString() {
-        return "heps.db.magnet_db.entity.DeviceInfoTable[ deviceId=" + deviceId + " ]";
+        return "heps.db.magnet.entity.DeviceInfoTable[ deviceId=" + deviceId + " ]";
     }
     
 }
