@@ -43,9 +43,7 @@
                 <div id="table" style="width: 1000px;margin:0 auto; ">
                     <div id="table1" style="margin-left:20px ;float: left ">
                         <p> 请输入磁铁设计要求：
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="getChanges1()">查看修改项</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="show()">xianshi</a>
-
+                            <!--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="getChanges1()">查看修改项</a>-->                         
                         </p>                                               
                         <table id="design_require" name="design_require" class="easyui-propertygrid" style="width:400px" data-options="
                                url: 'design_require.json',
@@ -55,26 +53,30 @@
                                columns: mycolumns                           
                                ">
                         </table>   
-                        <div style="margin:20px 0;"></div>
+                        <div style="margin:10px 0;"></div>
                         <div class="easyui-panel" title="其他信息"  >
                             <div style="margin-bottom:10px;margin-top: 10px">
-                                <input  class="easyui-textbox" label="磁铁设计人：（多人请用分号隔开）" labelPosition="top" style="width:100%">
+                                <input  class="easyui-textbox" name="designed_by" label="磁铁设计人：（多人请用分号隔开）" labelPosition="top" style="width:100%">
                             </div>
                             <div style="margin-bottom:10px">
-                                <input class="easyui-textbox" label="磁铁负责人：（多人请用分号隔开）" labelPosition="top" style="width:100%">
+                                <input class="easyui-textbox" name="approved_by" label="磁铁负责人：（多人请用分号隔开）" labelPosition="top" style="width:100%">
                             </div>
                             <div style="margin-bottom:10px">
-                                <input class="easyui-filebox" label="上传机械设计图:（PDF格式）" labelPosition="top" data-options="prompt:'选择机械设计文件...'" style="width:100%">
+                                <input class="easyui-filebox" name="mplot" label="上传机械、物理设计图:（PDF格式）" labelPosition="top" data-options="prompt:'选择机械设计文件...'" style="width:100%">
                             </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-filebox" label="上传物理设计图：（PDF格式）" labelPosition="top" data-options="prompt:'选择物理设计文件...'" style="width:100%">
-                            </div>                            
+                            <div style="margin-bottom:10px">
+                                <input class="easyui-filebox"  name="pplot" data-options="prompt:'选择物理设计文件...'" style="width:100%">
+                            </div>   
+                            <div style="margin-bottom:10px">
+                                <input class="easyui-textbox" name="remark" label="备注" labelPosition="top" style="width:100%">
+                            </div>
                         </div>
                     </div>
                     <div id="table2" style="margin-left:20px ;float: right">
                         <p>请输入磁铁设计参数：
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="getChanges2()">查看修改项</a>
+                            <!--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="getChanges2()">查看修改项</a>-->
                             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addrow()">新增设计参数</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="delrow()">删除设计参数</a>
                         </p>
                         <table id="design_para" name="design_para" class="easyui-propertygrid" style="width:400px" data-options="
                                url: 'design_para.json',
@@ -91,20 +93,20 @@
                     <p>输入完成请点击提交
                         <input style="width:90px; " type="submit" value="提交" >
                         <input type="hidden" id="hd1" name="hd1"/>
-
+                        <input type="hidden" id="hd2" name="hd2"/>
                     </p>
                 </div>
-
             </form>
-
         </div>
         <script type="text/javascript">
             function isExistLoginName() {
                 alert("onblur!");
             }
             function submitform() {
-                var all = $("#design_require").datagrid("getData");
-                document.getElementById("hd1").value = JSON.stringify(all);
+                var require = $("#design_require").datagrid("getData");
+                document.getElementById("hd1").value = JSON.stringify(require);
+                var parameter = $("#design_para").datagrid("getData");
+                document.getElementById("hd2").value = JSON.stringify(parameter);
 
                 var yn = window.confirm("确认提交？");
                 if (yn) {
@@ -115,10 +117,7 @@
         </script>
 
         <script type="text/javascript">
-            function show() {
-                var all = $("#design_require").datagrid("getData");
-                alert('myData : ' + JSON.stringify(all));
-            }
+
             function newtype()
             {
                 var name = window.prompt("新建磁铁类型", "");
@@ -162,7 +161,8 @@
                             }
                             if (editor === "numberbox" && value !== '') {
                                 return Number(value);
-                            }
+                            } else
+                                return value;
                         }}
                 ]];
             function getChanges1() {
@@ -200,9 +200,17 @@
                     name: property,
                     value: '',
                     group: group,
-                    editor: type
+                    editor: {type: type, options: {precision: 5}}
                 };
                 $('#design_para').propertygrid('appendRow', row);
+            }
+            function delrow() {
+                var row = $('#design_para').propertygrid('getSelected');
+                var index = $('#design_para').propertygrid('getRowIndex', row);                
+                if (index > 19) {
+                    $('#design_para').propertygrid('deleteRow', index);
+                } else
+                    alert("只能删除自定义参数！");
             }
         </script>  
 
